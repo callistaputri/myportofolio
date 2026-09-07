@@ -8,7 +8,7 @@ Prodi: Sistem Informasi
 
 ## Tugas 1
 
-1. Ya, saya saat merancang struktur HTML, saya menggunakan elemen semantik HTML5 yaitu <section>. Elemen tersebut membantu saya dalam pembuatan tugas dengan cara menjadi pembagi konten About Me dan Experiences dengan terstruktur. Penggunaan elemen ini membantu saya dalam membagi setiap informasi berdasarkan bagiannya masing-masing sehingga website menjadi lebih rapi dan lebih mudah dikembangkan. Selain itu, saya juga menggunakan elemen <div> yang membantu saya untuk mengatur layout konten yang ada. Saya juga menggunakan elemen <ul> dan <li> untuk membuat daftar pengalaman menjadi lebih tertata.
+1. Ya, saya saat merancang struktur HTML, saya menggunakan elemen semantik HTML5 yaitu < section >. Elemen tersebut membantu saya dalam pembuatan tugas dengan cara menjadi pembagi konten About Me dan Experiences dengan terstruktur. Penggunaan elemen ini membantu saya dalam membagi setiap informasi berdasarkan bagiannya masing-masing sehingga website menjadi lebih rapi dan lebih mudah dikembangkan. Selain itu, saya juga menggunakan elemen < div > yang membantu saya untuk mengatur layout konten yang ada. Saya juga menggunakan elemen < ul > dan < li > untuk membuat daftar pengalaman menjadi lebih tertata.
 
 
 2. Tantangan yanvg saya temukan adalah bagaimana cara menjaga posisi garis dan titik yang terdapat pada bagian kiri experiences saya agar tetap sejajar dengan daftar pengalaman saat website dibuka dengan ukuran layar yang berbeda. Saya menggunakan garis dan titik untuk memisahkan satu pengalaman dengan yang lainnya. Saya juga menggunakan hover pada titik tersebut, di mana dot akan berubah menjadi penuh ketika kursor diarahkan ke salah satu pengalaman sehingga membuat tanda kepada user mengenai bagian apa yang sedang dipilih/dilihat. 
@@ -18,6 +18,7 @@ Prodi: Sistem Informasi
 
 
 AI Disclosure
+
 Dalam proses pengembangan website portofolio ini, saya menggunakan beberapa AI tools yaitu ChatGPT dan Claude sebagai alat bantu pembelajaran dan pemecahan masalah. Saya menggunakannya terutama ketika saya mengalami kesulitan memahami konsep atau menemukan solusi terhadap permasalahan yang muncul selama proses pengembangan website.
 
 AI membantu saya memahami berbagai fitur dan elemen HTML5 serta CSS ketika terdapat konsep yang belum saya pahami, termasuk fungsi elemen semantik, pengaturan layout, responsive design, dan stylingnya. Selain itu, saya juga menggunakan AI untuk meminta arahan ketika ingin menambahkan fitur atau tampilan tertentu pada website, seperti menyusun garis timeline dan dots pada bagian Experiences agar terlihat rapi.

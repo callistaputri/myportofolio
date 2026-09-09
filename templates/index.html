@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Callista - Portfolio</title>
+    <title>{{ name }} - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -12,10 +12,10 @@
 <body>
     <header class="site-header">
         <div class="container">
-            <a href="#profile" class="brand">Callista</a>
+            <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
             <nav>
-                <a href="#profile">Profile</a>
-                <a href="#experiences">Experiences</a>
+                <a href="{% url 'main:show_main' %}">Profile</a>
+                <a href="{% url 'main:show_experience' %}">Experience</a>
             </nav>
         </div>
     </header>
@@ -25,22 +25,22 @@
             <div class="container hero-grid">
                 <div class="hero-identity">
                     <p class="hero-kicker">Information Systems &middot; Universitas Indonesia</p>
-                    <h1>Callista Putri Anjola</h1>
+                    <h1>{{ name }}</h1>
                 </div>
                 <div class="hero-photo">
                     <div class="photo-block"></div>
-                    <img class="avatar" src="/static/img/callista.jpg.jpeg" alt="Photo of Callista">
+                    <img class="avatar" src="/static/img/callista.jpg.jpeg" alt="Photo of {{ name }}">
                 </div>
                 <div class="hero-details">
-                    <p class="bio">I am a second-year Information Systems student at Universitas Indonesia who is passionate about learning technology and making a social impact. I am motivated to develop practical skills, excited to take on new challenges, and committed to contributing effectively in teamwork. I am ready to learn and grow with an open mind and a willingness to improve.</p>
+                    <p class="bio">{{ bio }}</p>
                     <dl class="meta-list">
                         <div class="meta-row">
                             <dt>NPM</dt>
-                            <dd>2506603740</dd>
+                            <dd>{{ npm }}</dd>
                         </div>
                         <div class="meta-row">
                             <dt>Program</dt>
-                            <dd>S1 Sistem Informasi</dd>
+                            <dd>{{ study_program }}</dd>
                         </div>
                     </dl>
                     <div class="social-links">
@@ -52,125 +52,11 @@
                 </div>
             </div>
         </section>
-
-        <section class="experiences" id="experiences">
-            <div class="container">
-                <h2>Experiences</h2>
-                <div class="experience-list">
-                    <div class="experience-item">
-                        <div class="experience-marker">   
-                            <span class="experience-dot"></span>
-                        </div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <h3>Expert Staff of Public Relations</h3>
-                                <span class="experience-date">June 2026 - Present</span>
-                            </div>
-                            <p class="experience-organization">Open House FASILKOM UI 2026</p>
-                            <ul class="experience-desc">
-                                <li>Being the face of Open House Fasilkom UI 2025 in external school visits</li>
-                                <li>Deliver presentations and engage with high school students to promote the event</li>
-                                <li>Handled MC requests from other divisions and coordinated MC assignments for events</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="experience-marker">   
-                            <span class="experience-dot"></span>
-                        </div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <h3>Staff of Event Division</h3>
-                                <span class="experience-date">Apr 2026 - Present</span>
-                            </div>
-                            <p class="experience-organization">COMPFEST 18</p>
-                            <ul class="experience-desc">
-                                <li>Coordinated seminar events and managed their preparation and execution</li>
-                                <li>Liaised with invited speakers and managed communication throughout the seminar preparation process</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="experience-marker">   
-                            <span class="experience-dot"></span>
-                        </div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <h3>Finance Assistant</h3>
-                                <span class="experience-date">2023 - Present</span>
-                            </div>
-                            <p class="experience-organization">We Are The Future</p>
-                            <ul class="experience-desc">
-                                <li>Manage We Are The Future's financial accounting</li>
-                                <li>Coordinate We Are The Future's financial funding and revenue</li>
-                                <li>Being We Are The Future's treasurer</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="experience-marker">   
-                            <span class="experience-dot"></span>
-                        </div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <h3>Staff of Public Relations</h3>
-                                <span class="experience-date">Aug 2025 - Dec 2025</span>
-                            </div>
-                            <p class="experience-organization">Open House FASILKOM UI 2025</p>
-                            <ul class="experience-desc">
-                                <li>Being the face of Open House Fasilkom UI 2025 in external school visits</li>
-                                <li>Deliver presentations and engage with high school students to promote the event</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="experience-marker">   
-                            <span class="experience-dot"></span>
-                        </div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <h3>Vice Person in Charge of Ticketing Sales</h3>
-                                <span class="experience-date">Nov 2023 - Aug 2024</span>
-                            </div>
-                            <p class="experience-organization">Sixtonation feat. Rhapsodie With Scraft 2024</p>
-                            <ul class="experience-desc">
-                                <li>Assisted in determining ticket prices by analyzing various factors and potential scenarios.</li>
-                                <li>Planned crowd management strategies to ensure smooth and safe ticket distribution.</li>
-                                <li>Handled tax calculations and ensured compliance with applicable regulations.</li>
-                                <li>Worked with finance and other teams to keep track of ticket sales.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="experience-item">
-                        <div class="experience-marker">   
-                            <span class="experience-dot"></span>
-                        </div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <h3>Staff of Event Division</h3>
-                                <span class="experience-date">Feb 2023 - Aug 2023</span>
-                            </div>
-                            <p class="experience-organization">Sixtonation feat. Rhapsodie With Scraft 2023</p>
-                            <ul class="experience-desc">
-                                <li>Worked as a bridge between the organizers, participants, and externals during the event</li>
-                                <li>Managed communications and handled issues that came up on the spot</li>
-                                <li>Monitored event progress and ensured timely execution of activities.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 Callista. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
 </body>

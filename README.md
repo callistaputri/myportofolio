@@ -26,3 +26,22 @@ AI membantu saya memahami berbagai fitur dan elemen HTML5 serta CSS ketika terda
 Biasanya, saya menjelaskan permasalahan yanhg terjadi secara spesifik dengan menyertakan potongan kode atau menjelaskan masalah yang terjadi pada halaman website. Contohnya, ketika terdapat elemen CSS yang sulit dirapikan, saya mendeskripsikan bentuk hasil yang saya inginkan kemudian meminta penjelasan mengenai penyebab dan cara memperbaikinya. Dengan cara tersebut, AI memberikan arahan yang lebih baik dibandingkan hanya meminta kode secara langsung.
 
 Saat saya menemukan error yang sudah sulit saya selesaikan sendiri, saya menggunakan AI untuk membantu mengidentifikasi sumber masalah berdasarkan kode dan tampilan yang saya kirimkan. Setelah mendapatkan penjelasan, saya mempelajari kembali letak kesalahan dan memahami alasan mengapa solusi tersebut bsia bekerja. Proses ini membantu saya melanjutkan pengembangan website dan juga meningkatkan pemahaman saya terhadap struktur HTML dan CSS yang digunakan.
+
+## Tugas 2
+
+1. Ketika pengguna membuka halaman education pada portofolio saya melalui /education/, request pertama akan masuk pada urls.py pada proyek. Request akan diarahkan ke main.urls karena saya memakai include("main.urls"). Setelah itu, main/urls.py menentukan bahwa url /education/ akan menjalankan show_education yang terdapat di views.py. Dalam views.py, saya mengambil data education dari model menggunakan Education.objects.all(). Lalu, data tersebut dikirimkan kepada templates/education.html. Di sana, data education ditampilkan denbgan menggunakan {% for %}. Jadi, setiap data yang berada di database akan ditampilkan di halaman. Lalu, hasilnya dikirinmkan ke browser dan ditampilkan sebagai halaman education.
+
+
+2. Menurut pendapat saya, data lebih baik disimpan di dalam model daripada ditulis manual langsung pada template agar lebih mudah jika ada perubahan atau penambahan data. Jika ditulis manual dalam template, setiap kali saya ingin menambahkan atau mengganti data, saya harus mengganti kode HTML nya. Sedangkan jika disimpan dalam model, saya dapat cukup menambahkan atau mengubah data di database dan template dapat menampilkannya secara otomatis. Selain itu, kode juga menjadi lebih rapi.
+
+
+3. makemigrations digunakan untuk membuat file yang berisi perubahan model yang saya buat, kalau migrate digunakan untuk menerapkan perubahan tersebut kepada database. contoh saat saya menambah model education, saya menjalankan python manage.py makemigrations dan perintah tersebut membuat file migration untuk model education. Setelah itu, saya akan menjalankan python manage.py migrate agar perubahannya benar-benar diterapkan pada database dan tabel education dibuat.
+
+
+AI Disclosure
+
+Dalam proses pengembangan website portofolio ini, saya menggunakan beberapa AI tools yaitu ChatGPT dan Gemini AI sebagai alat bantu pembelajaran dan pemecahan masalah. Saya menggunakannya terutama ketika mengalami kesulitan memahami konsep Django atau menemukan solusi dari masalah yang muncul selama proses pengembangan website.
+
+Pada tugas ini, saya menggunakan AI untuk membantu memahami cara membuat model baru, melakukan migration, mengambil data dari model melalui view, serta menampilkan data menggunakan Django Template Language (DTL). Selain itu, saya menggunakan AI untuk membantu menyesuaikan styling Education dan Experience agar sesuai dengan tema website.
+
+Ketika menemukan error, saya memberikan kode atau pesan error kepada AI untuk membantu mencari sumber masalah. Setelah mendapatkan penjelasan, saya mempelajari kembali penyebab error tersebut dan melakukan perbaikan pada kode saya sendiri. Dengan begitu, AI membantu saya menyelesaikan masalah sekaligus memahami proses pengembangan fitur baru pada Django.

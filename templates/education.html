@@ -31,21 +31,29 @@
                     {% for education in education_list %}
                         <article class="education-card">
                             <h2>{{ education.institution }}</h2>
-                            <p class="education-description">
-                                {{ education.degree }}
-                            </p>
 
                             {% if education.field_of_study %}
-                                <p class="education-description">{{ education.field_of_study }}</p>
+                                <p class="education-description">
+                                    {{ education.field_of_study }}
+                                </p>
                             {% endif %}
+
                             <p class="education-status">
-                                {{ education.started|date:"Y" }} -
+                                {{ education.started|date:"M Y" }} -
                                 {% if education.ended %}
-                                    {{ education.ended|date: "Y" }}
+                                    {{ education.ended|date:"M Y" }}
                                 {% else %}
                                     Present
                                 {% endif %}
                             </p>
+
+                            <span class="education-badge">
+                                {% if education.ended %}
+                                    COMPLETED
+                                {% else %}
+                                    CURRENTLY STUDYING
+                                {% endif %}
+                            </span>
                         </article>
                     {% empty %}
                         <p class="empty-state">

@@ -196,11 +196,28 @@ h1, .brand {
     align-items: stretch;
     padding: 0.75rem;
     border-radius: var(--radius);
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.experience-item:hover {
+    background-color: rgba(255, 143, 200, 0.08);
+    transform: translateX(4px);
 }
 
 .experience-item:hover .experience-dot {
     background-color: var(--accent);
+    transform: scale(1.2);
+}
+
+.experience-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background-color: var(--paper);
+    border: 3px solid var(--accent);
+    z-index: 1;
+    margin-top: 0.15rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .experience-content {
@@ -304,38 +321,60 @@ h1, .brand {
     font-size: 2rem;
 }
 
-.experience-grid {
+.education-section {
+    padding: 4rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.education-section h1 {
+    margin: .4rem 0 1.5rem;
+    font-size: 2rem;
+}
+
+.education-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1rem;
 }
 
-.experience-card {
+.education-card {
     padding: 1.25rem;
     background-color: #fff;
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    border-radius: 16px;
 }
 
-.experience-category {
-    color: var(--accent-dark);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
+.education-card:hover {
+    background-color: rgba(255, 143, 200, .08);
+    transform: translateY(-4px);
 }
 
-.experience-card h2 {
-    margin: 0.5rem 0;
-    font-size: 1.25rem;
+.education-card h2 {
+    font-size: 1.15rem;
+    margin-bottom: .5rem;
 }
 
-.experience-description,
-.empty-state {
+.education-description {
     color: var(--text-muted);
+    font-size: .92rem;
 }
 
-.experience-status {
+.education-status {
     margin-top: 1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
+    color: var(--accent-dark);
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.education-badge {
+    display: inline-block;
+    margin-top: .75rem;
+    padding: .25rem .6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--accent-dark);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .05em;
 }

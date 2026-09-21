@@ -518,6 +518,10 @@ h1, .brand {
     margin-top: 1.5rem;
 }
 
+.education-section > .container > .button {
+    margin-bottom: 1.5rem;
+}
+
 .button-danger {
     background: var(--accent);
 }

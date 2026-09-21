@@ -10,6 +10,9 @@
             <div class="container">
                 <p class="section-kicker">Riwayat pendidikan saya</p>
                 <h1>Education</h1>
+                <a href="{% url 'main:create_education' %}" class="button">
+                    Add Education
+                </a>
 
                 <div class="education-grid">
                     {% for education in education_list %}
@@ -44,7 +47,7 @@
                                    class="button">
                                     Edit
                                 </a>
-                                
+
                                 {% include "components/education_delete_modal.html" with education=education %}
                             </div>
                             

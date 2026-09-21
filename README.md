@@ -45,3 +45,22 @@ Dalam proses pengembangan website portofolio ini, saya menggunakan beberapa AI t
 Pada tugas ini, saya menggunakan AI untuk membantu memahami cara membuat model baru, melakukan migration, mengambil data dari model melalui view, serta menampilkan data menggunakan Django Template Language (DTL). Selain itu, saya menggunakan AI untuk membantu menyesuaikan styling Education dan Experience agar sesuai dengan tema website.
 
 Ketika menemukan error, saya memberikan kode atau pesan error kepada AI untuk membantu mencari sumber masalah. Setelah mendapatkan penjelasan, saya mempelajari kembali penyebab error tersebut dan melakukan perbaikan pada kode saya sendiri. Dengan begitu, AI membantu saya menyelesaikan masalah sekaligus memahami proses pengembangan fitur baru pada Django.
+
+## Tugas 3
+
+1. Menurut saya, ModelForm digunakan agar pembuatan form menjadi lebih mudah karena form dapat langsung terhubung dengan model yang telah dibuat. Jadi, field yang ada pada model dapat digunakan pada form tanpa mengharuskan saya membuat perubahan pada HTML secara manual. Setelah data diisi dan valid, data juga dapat langsung disimpan ke dalam database dengan menggunakan form.save(). Selain itu, {% csrf_token %} digunakan untuk keamanan pada form yang menggunakan method POST. Token tersebut membantu django memastikan bahwa request yang dikirim berasal dari form yang terpercaya, sehingga request yang tidak memiliki token sesuai akan ditolak. Jadi, setiap form yang terdapat pada website saya perlu menggunakan {% csrf_token %} agar dapat diproses dengan aman.
+
+
+2. Menurut saya, JSON lebih sering digunakan dalam pengembangan aplikasi web modern karena bentuk datanya lebih sederhana dan lebih mudah dibaca dibanding dengan XML. JSON juga menggunakan struktur seperti key dan value sehingga lebih mudah digunakan untuk menyimpan dan juga mengirim data. Selain itu, JSON juga memiliki struktur yang cukup mirip dengan struktur data yang digunakan dalam pemrograman sehingga lebih mudah prosesnya.
+
+
+3. Dalam portofolio saya, saat data education ingin direturn dalam bentuk JSON, request akan masuk ke fungsi get_education_json yang terdapat pada file views.py. Di dalam fungsi tersebut, saya mengambil data education dari database menggunakan Education.objects.all(). Setelahnya, data tersebut diubah mnejadi JSON dengan serializers.serialize("json", education). Hasil JSON tersebut kemudian direturn menggunakan HTTPResponse dengan content_type="application/json". Pada halaman education, saya memanggil fungsi tersebut dan mengambil hasil JSON nya. Setelah itu, diproses menggunakan serializers.deserialize() sehingga data yang pada awalnya berbentuk JSON bisa kembali menjadi object django dan ditampilkan pada template education.html. Serialization diperlukan karena data yang saya ambil dari database masih berupa object atau QuerySet django, sehingga perlu diubah ke format JSON terlebih dahulu agar dapat dikirim dan digunakan sebagai data JSON.
+
+
+AI Disclosure
+
+Dalam proses mengerjakan tugas 3, saya menggunakan AI tools seperti ChatGPT dan Claude sebagai alat bantu ketika saya mengalami kesulitan dalam memahami materi atau menemukan error pada portofolio saya.
+
+Saya menggunakan AI untuk membantu memahami cara membuat dan menggunakan ModelForm, membuat fitur seperti create, update, dan delete pada section education, serta memahami proses pengambilan data dalam bentuk JSON dan melakukan serialization dan deserialization. Saya juga menggunakan AI untuk membantu menyesuaikan beberapa bagian styling pada website portofolio sayaa.
+
+Saat aya mengalami error, biasanya saya memberikan beberapa kode atau pesan error yang muncul kepada AI untuk membantu saya memahami penyebab error. Setelah itu saya mencoba menerapkan solusi yang diberi pada project saya dan mengecek kembali apakah hasilnya sesuai. Jadi, AI membantu saya dalam belajar dan memahami bagian yang belum saya mengerti selama mengerjakan tugas, bukan untuk membuat keseluruhan project secara langsung.

@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from main.models import Experience, Education
+from main.views import SECRET_CODE
 
 
 class MainTest(TestCase):
@@ -85,3 +86,11 @@ class MainTest(TestCase):
 
         response = self.client.get(reverse("main:show_education"))
         self.assertContains(response, "Belum ada pendidikan yang ditambahkan.")
+
+    def test_education_json(self):
+        response = self.client.get(reverse("main:get_education_json"), HTTP_X_PORTFOLIO_SECRET=SECRET_CODE)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "application/json")
+        self.assertContains(response, "Universitas Indonesia")
+        self.assertContains(response, "Information Systems")

@@ -38,8 +38,16 @@
                                     CURRENTLY STUDYING
                                 {% endif %}
                             </span>
+
+                            <div class="education-actions">
+                                <a href="{% url 'main:update_education' education.id %}"
+                                   class="button">
+                                    Edit
+                                </a>
+                                
+                                {% include "components/education_delete_modal.html" with education=education %}
+                            </div>
                             
-                            {% include "components/education_delete_modal.html" with education=education %}
                         </article>
                     {% empty %}
                         <p class="empty-state">

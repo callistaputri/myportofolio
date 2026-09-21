@@ -87,6 +87,37 @@ def create_education(request):
 
     return render(request, "educations_form.html", context)
 
+def update_education(request, education_id):
+    education = get_object_or_404(Education, pk=education_id)
+
+    form = EducationForm(
+        request.POST or None,
+        instance=education
+    )
+
+    if request.method == "POST" and form.is_valid():
+        if form.cleaned_data["password"] != SECRET_CODE:
+            form.add_error("password", "Kode salah.")
+        else:
+            form.save()
+            messages.success(
+                request,
+                "Pendidikan berhasil diperbarui!"
+            )
+            return redirect("main:show_education")
+
+    context = {
+        "name": "Callista Putri Anjola",
+        "form": form,
+        "education": education,
+    }
+
+    return render(
+        request,
+        "education_update_form.html",
+        context
+    )
+
 def delete_education(request, education_id):
     education = get_object_or_404(Education, pk=education_id)
 

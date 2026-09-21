@@ -432,6 +432,20 @@ h1, .brand {
     background: var(--ink);
 }
 
+.education-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.education-actions .button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
 .education-delete-modal {
     display: none;
     position: fixed;

@@ -1,4 +1,5 @@
 import uuid
+from django.contrib.auth.models import User
 from django.db import models
 
 class Experience(models.Model):
@@ -31,6 +32,10 @@ class Education(models.Model):
     field_of_study = models.CharField(max_length=255, blank=True)
     started = models.DateField()
     ended = models.DateField(blank=True, null=True)
+
+    starred_by = models.ManyToManyField(
+        User, related_name="starred_education", blank=True
+    )
 
     def __str__(self):
         return self.institution

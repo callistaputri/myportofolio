@@ -4,10 +4,16 @@ from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 from django.core import serializers
 from django.http import HttpResponse
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 import os
+import datetime
 SECRET_CODE = os.environ.get("PORTFOLIO_SECRET_CODE")
 
 def show_main(request):
+    last_login = request.COOKIES.get('last_login', 'Belum ada sesi login / Cookie tidak ditemukan')
     context = {
         "name": "Callista Putri Anjola",
         "npm": "2506603740",
@@ -18,7 +24,7 @@ def show_main(request):
             "develop practical skills, excited to take on new challenges, and committed to "
             "contributing effectively in teamwork. I am ready to learn and grow with an open mind and a willingness to improve."
         ),
-        "experience_list": Experience.objects.all(),
+        "last_login": last_login,
     }
     return render(request, "index.html", context)
 
@@ -66,10 +72,13 @@ def get_education_json(request):
             institution__icontains=institution_query
         )
 
-    education_json = serializers.serialize("json", education)
+    education_json = serializers.serialize("json", education, use_natural_foreign_keys=True)
     return HttpResponse(education_json, content_type="application/json")
 
+@login_required(login_url="/login/")
 def create_education(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
     form = EducationForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -118,7 +127,10 @@ def update_education(request, education_id):
         context
     )
 
+@login_required(login_url="/login/")
 def delete_education(request, education_id):
+    if not request.user.is_superuser:
+            raise PermissionDenied
     education = get_object_or_404(Education, pk=education_id)
 
     if request.method == "POST":
@@ -126,4 +138,51 @@ def delete_education(request, education_id):
         messages.success(request, "Pendidikan berhasil dihapus!")
         return redirect("main:show_education")
 
+    return redirect("main:show_education")
+
+def register(request):
+    form = UserCreationForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Akun berhasil dibuat. Silakan login.")
+        return redirect("main:login")
+
+    context = {
+        "name": "Callista",
+        "form": form,
+    }
+    return render(request, "register.html", context)
+
+def login_user(request):
+    form = AuthenticationForm(request, data=request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        response = redirect("main:show_main")
+        response.set_cookie('last_login', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        return response
+
+    context = {
+        "name": "Burhan",
+        "form": form,
+    }
+    return render(request, "login.html", context)
+
+def logout_user(request):
+    logout(request)
+    response = redirect("main:show_main")
+    response.delete_cookie('last_login')
+    return response
+
+@login_required(login_url="/login/")
+def toggle_star(request, education_id):
+    education = get_object_or_404(Education, pk=education_id)
+
+    if request.method == "POST":
+        if request.user in education.starred_by.all():
+            education.starred_by.remove(request.user)
+        else:
+            education.starred_by.add(request.user)
     return redirect("main:show_education")

@@ -10,9 +10,12 @@
             <div class="container">
                 <p class="section-kicker">Riwayat pendidikan saya</p>
                 <h1>Education</h1>
+                {% if user.is_superuser %} 
                 <a href="{% url 'main:create_education' %}" class="button">
+                    <span aria-hidden="true">+</span>
                     Add Education
                 </a>
+            {% endif %}
 
                 <div class="education-grid">
                     {% for education in education_list %}
@@ -46,9 +49,12 @@
                                 <a href="{% url 'main:update_education' education.id %}"
                                    class="button">
                                     Edit
-                                </a>
+                            </a>
 
+                                {% include "components/education_star.html" with education=education %}
+                            {% if user.is_superuser %}
                                 {% include "components/education_delete_modal.html" with education=education %}
+                            {% endif %}
                             </div>
                             
                         </article>

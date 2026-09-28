@@ -47,11 +47,13 @@ def show_education(request):
 
     education = [item.object for item in education]
     institution_query = request.GET.get("institution", "").strip()
+    is_editor = request.user.groups.filter(name="Editor").exists()
 
     context = {
         "name": "Callista Putri Anjola",
         "education_list": education,
         "institution_query": institution_query,
+        "is_editor": is_editor
     }
     return render(request, "education.html", context)
 
@@ -96,7 +98,15 @@ def create_education(request):
 
     return render(request, "educations_form.html", context)
 
+
+@login_required(login_url="/login/")
 def update_education(request, education_id):
+    if not (
+        request.user.is_superuser 
+        or request.user.groups.filter(name="Editor").exists()
+    ):
+        raise PermissionDenied
+    
     education = get_object_or_404(Education, pk=education_id)
 
     form = EducationForm(

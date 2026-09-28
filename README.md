@@ -64,3 +64,13 @@ Dalam proses mengerjakan tugas 3, saya menggunakan AI tools seperti ChatGPT dan 
 Saya menggunakan AI untuk membantu memahami cara membuat dan menggunakan ModelForm, membuat fitur seperti create, update, dan delete pada section education, serta memahami proses pengambilan data dalam bentuk JSON dan melakukan serialization dan deserialization. Saya juga menggunakan AI untuk membantu menyesuaikan beberapa bagian styling pada website portofolio sayaa.
 
 Saat aya mengalami error, biasanya saya memberikan beberapa kode atau pesan error yang muncul kepada AI untuk membantu saya memahami penyebab error. Setelah itu saya mencoba menerapkan solusi yang diberi pada project saya dan mengecek kembali apakah hasilnya sesuai. Jadi, AI membantu saya dalam belajar dan memahami bagian yang belum saya mengerti selama mengerjakan tugas, bukan untuk membuat keseluruhan project secara langsung.
+
+## Tugas 4
+
+AI Disclosure
+
+Dalam proses mengerjakan tugas 4, saya menggunakan AI tools seperti ChatGPT dan Gemini sebagai alat bantu ketika saya mengalami kesulitan dalam memahami materi, menerapkan fitur baru, atau menemukan error pada portofolio saya.
+
+Saya menggunakan AI untuk membantu memahami konsep autentikasi dan otorisasi, khususnya dalam membuat role editor menggunakan django, membatasi akses create, update, dan delete sesuai role pengguna, serta menerapkan pengecekan hak akses di sisi server. Saya juga menggunakan AI untuk membantu memahami dan mengecek implementasi fitur star menggunakan ManyToManyField, serta menyesuaikan tampilan dan interaksi pada navbar seperti hover.
+
+Saat mengalami error, saya biasanya memberikan potongan pesan error yang muncul kepada AI untuk membantu memahami penyebabnya dan mencari kemungkinan solusi. Setelah itu, saya menerapkan dan menyesuaikan solusi tersebut pada project saya serta melakukan pengujian kembali untuk memastikan fitur berjalan sesuai yang diinginkab. Saya menggunakan AI sebagai alat bantu dalam proses belajar dan memahami konsep.

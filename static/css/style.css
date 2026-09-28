@@ -63,7 +63,34 @@ h1, .brand {
 .site-header nav a {
     color: var(--ink);
     text-decoration: none;
-    font-size: 0.95rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.site-header nav a:hover,
+.site-header nav a.active {
+    background-color: #fde0ef;
+    color: var(--ink);
+}
+
+.site-header nav .nav-user {
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.site-header nav a:hover,
+.site-header nav .nav-user:hover {
+    background-color: #fde0ef;
+    color: var(--ink);
+}
+
+.site-header nav a.active {
+    background-color: #fde0ef;
+    color: var(--ink);
 }
 
 .hero {

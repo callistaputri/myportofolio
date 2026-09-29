@@ -1,18 +1,19 @@
 from django.forms import ModelForm, TextInput, DateInput
-
 from main.models import Education
-
 from django import forms
+from django.core.exceptions import ValidationError
+from django.utils.html import strip_tags
 
 class EducationForm(ModelForm):
     password = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(
-            attrs= {
+            attrs={
                 "placeholder": "Masukkan kode rahasia",
             }
         ),
     )
+
     class Meta:
         model = Education
         fields = [
@@ -53,3 +54,20 @@ class EducationForm(ModelForm):
                 }
             ),
         }
+
+    def clean_institution(self):
+        institution = strip_tags(
+            self.cleaned_data["institution"]
+        ).strip()
+
+        if not institution:
+            raise ValidationError(
+                "Nama institusi tidak boleh hanya berisi tag HTML."
+            )
+
+        return institution
+
+    def clean_field_of_study(self):
+        return strip_tags(
+            self.cleaned_data["field_of_study"]
+        ).strip()

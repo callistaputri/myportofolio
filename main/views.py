@@ -3,11 +3,12 @@ from main.forms import EducationForm
 from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.views.decorators.http import require_POST
 import os
 import datetime
 SECRET_CODE = os.environ.get("PORTFOLIO_SECRET_CODE")
@@ -37,45 +38,56 @@ def show_experience(request):
     return render(request, "experience.html", context)
 
 def show_education(request):
-    request.META["HTTP_X_PORTFOLIO_SECRET"] = SECRET_CODE
-    json_response = get_education_json(request)
-
-    education = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-
-    education = [item.object for item in education]
     institution_query = request.GET.get("institution", "").strip()
     is_editor = request.user.groups.filter(name="Editor").exists()
 
     context = {
         "name": "Callista Putri Anjola",
-        "education_list": education,
         "institution_query": institution_query,
-        "is_editor": is_editor
+        "is_editor": is_editor,
+        "form": EducationForm(),
     }
+
     return render(request, "education.html", context)
 
 def get_education_json(request):
-    secret_code = request.headers.get("X-Portfolio-Secret")
-
-    if secret_code != SECRET_CODE:
-        return HttpResponse(
-            "Unauthorized",
-            status=401,
-        )
-    
     institution_query = request.GET.get("institution", "").strip()
-    education = Education.objects.all()
+    education = Education.objects.prefetch_related("starred_by").all()
 
     if institution_query:
         education = education.filter(
             institution__icontains=institution_query
         )
 
-    education_json = serializers.serialize("json", education, use_natural_foreign_keys=True)
-    return HttpResponse(education_json, content_type="application/json")
+    data = []
+
+    for item in education:
+        starred_users = item.starred_by.all()
+
+        is_starred = (
+            request.user in starred_users
+            if request.user.is_authenticated
+            else False
+        )
+
+        starred_by_names = ", ".join(
+            [user.username for user in starred_users]
+        )
+
+        data.append({
+            "pk": str(item.id),
+            "fields": {
+                "institution": item.institution,
+                "field_of_study": item.field_of_study,
+                "started": item.started.isoformat(),
+                "ended": item.ended.isoformat() if item.ended else None,
+                "star_count": starred_users.count(),
+                "is_starred": is_starred,
+                "starred_by_names": starred_by_names,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
 
 @login_required(login_url="/login/")
 def create_education(request):
@@ -97,6 +109,32 @@ def create_education(request):
     }
 
     return render(request, "educations_form.html", context)
+
+@require_POST
+def create_education_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Hanya pemilik portofolio yang dapat menambahkan pendidikan."},
+            status=403,
+        )
+
+    form = EducationForm(request.POST)
+
+    if form.is_valid():
+        education = form.save()
+
+        return JsonResponse(
+            {
+                "message": "Pendidikan berhasil ditambahkan.",
+                "pk": str(education.id),
+            },
+            status=201,
+        )
+
+    return JsonResponse(
+        {"errors": form.errors.get_json_data()},
+        status=400,
+    )
 
 
 @login_required(login_url="/login/")

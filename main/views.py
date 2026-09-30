@@ -32,7 +32,7 @@ def show_main(request):
 
 def show_experience(request):
     context = {
-        "name": "Callista",
+        "name": "Callista Putri Anjola",
         "experience_list": Experience.objects.all(),
     }
     return render(request, "experience.html", context)
@@ -197,7 +197,7 @@ def register(request):
         return redirect("main:login")
 
     context = {
-        "name": "Callista",
+        "name": "Callista Putri Anjola",
         "form": form,
     }
     return render(request, "register.html", context)
@@ -213,7 +213,7 @@ def login_user(request):
         return response
 
     context = {
-        "name": "Burhan",
+        "name": "Callista Putri Anjola",
         "form": form,
     }
     return render(request, "login.html", context)

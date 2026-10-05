@@ -74,3 +74,22 @@ Dalam proses mengerjakan tugas 4, saya menggunakan AI tools seperti ChatGPT dan 
 Saya menggunakan AI untuk membantu memahami konsep autentikasi dan otorisasi, khususnya dalam membuat role editor menggunakan django, membatasi akses create, update, dan delete sesuai role pengguna, serta menerapkan pengecekan hak akses di sisi server. Saya juga menggunakan AI untuk membantu memahami dan mengecek implementasi fitur star menggunakan ManyToManyField, serta menyesuaikan tampilan dan interaksi pada navbar seperti hover.
 
 Saat mengalami error, saya biasanya memberikan potongan pesan error yang muncul kepada AI untuk membantu memahami penyebabnya dan mencari kemungkinan solusi. Setelah itu, saya menerapkan dan menyesuaikan solusi tersebut pada project saya serta melakukan pengujian kembali untuk memastikan fitur berjalan sesuai yang diinginkab. Saya menggunakan AI sebagai alat bantu dalam proses belajar dan memahami konsep.
+
+## Tugas 5
+
+1. Debouncing merupakan teknik untuk menunda pengeksekusian suatu fungsi sampai user berhenti mengetik selama beberapa saat sebelum mengirim request ke server. Tanpa debouncing, setiap huruf yang diketik bisa langsung membuat request AJAX, sehingga terdapat banyak request yang dikirim. Dengan debouncing, pencarian akan baru dijalankan setelah user berhenti mengetik dalam beberapa waktyu. Teknik ini penting karena dapat mengurangi jumlah request ke server dalam satu waktu.
+
+
+2. fetch() digunakan untuk meminta data dari server dan prosesnya membutuhkan wkatu. await digunakan agar program menunggu hasil dari fetch() dulu sebelum lanjut ke kode berikutnya. Dengan await kita bisa dapat hasil terlebih dulu sebelum digunakan. Jika tidak memakai await, kode berikutnya akan langsung dijalankan meski proses fetch() belum selesai. 
+
+
+3. XSS adalah serangan saat seseorang memasukkan kode JS berbahaya ke dalam website, hingga kode tersebut bisa dijalankan di browser user lain. Data yang ditampilkan dari AJAX atau JS lebih rentan karena data dari server biasanya kita masukkan sendiri ke HTML menggunakan JavaScript, misalnya dengan innerHTML. JS tidak otomatis melakukan escape terhadap data tersebut. Jadi, jika data mengandung kode HTML atau JavaScript berbahaya, browser bisa menganggapnya sebagai kode dan menjalankannya.
+
+
+AI Disclosure
+
+Dalam mengerjakan tugas 5 saya menggunakan AI tools seperti ChatGPT dan Claude sebagai alat bantu ketika mengalami kesulitan, menerapkan fitur baru, atau terdapat error pada website saya. 
+
+Saya menggunakan AI untuk memahami konsep AJAX, JSON, JS, khususnya dalam menampilkan data Experience secara dinamis tanpa melakukan reload page. Saya juga menggunakan AI untuk memahami penerapan search debouncing, serta dalam menambahkan form untuk add experience menggunakan modal dan pengiriman data melalui AJAX. Saya juga menggunakan AI untuk membantu menyesuaikan tampilan form, search bar, loading state, empty state, error state, serta toast notification agar sesuai dengan fitur yang dibuat.
+
+Saat mengalami error, saya biasanya memberikan potongan kode atau pesan error yang muncul kepada AI untuk membantu memahami penyebabnya. Setelah itu, saya menyesuaikan solusi yang diberi pada project saya serta melakukan test kembali untuk memastikan fitur berjalan lancar.

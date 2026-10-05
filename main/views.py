@@ -49,7 +49,7 @@ def get_experience_json(request):
         experiences = experiences.filter(
             title__icontains=title_query
         )
-        
+
     data = []
 
     for item in experiences:

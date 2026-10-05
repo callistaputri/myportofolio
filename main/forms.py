@@ -80,6 +80,8 @@ class ExperienceForm(ModelForm):
             "description",
             "category",
             "thumbnail",
+            "started_at",
+            "ended_at",
         ]
 
         labels = {
@@ -87,6 +89,8 @@ class ExperienceForm(ModelForm):
             "description": "Deskripsi",
             "category": "Kategori",
             "thumbnail": "Thumbnail",
+            "started_at": "Tanggal mulai",
+            "ended_at": "Tanggal selesai"
         }
 
         widgets = {
@@ -105,6 +109,16 @@ class ExperienceForm(ModelForm):
             "thumbnail": TextInput(
                 attrs={
                     "placeholder": "https://...",
+                }
+            ),
+            "started_at": DateInput(
+                attrs={
+                    "type": "date",
+                }
+            ),
+            "ended_at": DateInput(
+                attrs={
+                    "type": "date",
                 }
             ),
         }

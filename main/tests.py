@@ -12,6 +12,7 @@ class MainTest(TestCase):
             title="Open House Fasilkom UI 2026 - Expert Staff of Public Relations",
             description="Represented Open House Fasilkom UI 2025 during external school visits, delivered presentations and engaged with high school students to promote the event, and coordinated MC requests and assignments across divisions.",
             category="volunteer",
+            started_at="2026-01-01"
         )
 
         self.education = Education.objects.create(
@@ -44,48 +45,63 @@ class MainTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "experience.html")
-        self.assertContains(response, self.experience.title)
-        self.assertContains(response, self.experience.description)
-        self.assertContains(response, "Volunteer")
-        self.assertContains(response, "Sedang berlangsung")
+        self.assertContains(response, "Experience")
         self.assertContains(response, f'href="{reverse("main:show_main")}"')
 
     def test_empty_experience_page(self):
         Experience.objects.all().delete()
-        response = self.client.get(reverse("main:show_experience"))
 
-        self.assertContains(response, "Belum ada pengalaman yang ditambahkan.")
+        response = self.client.get(
+            reverse("main:get_experience_json")
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), [])
 
     def test_completed_experience(self):
         self.experience.ended_at = timezone.now()
         self.experience.save()
-        response = self.client.get(reverse("main:show_experience"))
 
         self.assertFalse(self.experience.is_ongoing)
-        self.assertContains(response, "Selesai")
-        self.assertNotContains(response, "Sedang berlangsung")
 
     def test_education_page(self):
         response = self.client.get(reverse("main:show_education"))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "education.html")
-        self.assertContains(response, self.education.institution)
-        self.assertContains(response, self.education.field_of_study)
-        self.assertContains(response, "Present")
+        self.assertContains(response, "Education")
+        self.assertContains(response, f'href="{reverse("main:show_main")}"')
 
     def test_education_data_appears(self):
-        response = self.client.get(reverse("main:show_education"))
+        response = self.client.get(
+            reverse("main:get_education_json"),
+            HTTP_X_PORTFOLIO_SECRET=SECRET_CODE
+        )
 
-        self.assertContains(response, "Universitas Indonesia")
-        self.assertContains(response, "Information Systems")
-        self.assertContains(response, "CURRENTLY STUDYING")
+        self.assertEqual(response.status_code, 200)
+
+        data = response.json()
+
+        self.assertEqual(len(data), 1)
+        self.assertEqual(
+            data[0]["fields"]["institution"],
+            "Universitas Indonesia"
+        )
+        self.assertEqual(
+            data[0]["fields"]["field_of_study"],
+            "Information Systems"
+        )
 
     def test_empty_education_page(self):
         Education.objects.all().delete()
 
-        response = self.client.get(reverse("main:show_education"))
-        self.assertContains(response, "Belum ada pendidikan yang ditambahkan.")
+        response = self.client.get(
+            reverse("main:get_education_json"),
+            HTTP_X_PORTFOLIO_SECRET=SECRET_CODE
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), [])
 
     def test_education_json(self):
         response = self.client.get(reverse("main:get_education_json"), HTTP_X_PORTFOLIO_SECRET=SECRET_CODE)

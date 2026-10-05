@@ -1,0 +1,62 @@
+<div
+    id="add-experience-modal"
+    class="experience-form-modal"
+    popover="auto"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="add-experience-modal-title">
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="add-experience-modal-title">
+                Tambah Experience
+            </h2>
+
+            <button
+                type="button"
+                class="modal-close"
+                popovertarget="add-experience-modal"
+                popovertargetaction="hide"
+                aria-label="Tutup">
+
+                &times;
+            </button>
+        </div>
+
+        <form
+            id="experience-form"
+            method="post"
+            class="experience-form">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% if field.errors %}
+                        <div class="field-error">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="modal-actions">
+                <button
+                    type="button"
+                    class="button secondary"
+                    popovertarget="add-experience-modal"
+                    popovertargetaction="hide">
+                    Batal
+                </button>
+
+                <button
+                    type="submit"
+                    class="button">
+                    Tambah Experience
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

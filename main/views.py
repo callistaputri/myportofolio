@@ -1,5 +1,5 @@
 from main.models import Experience, Education
-from main.forms import EducationForm
+from main.forms import EducationForm, ExperienceForm
 from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 from django.core import serializers
@@ -31,11 +31,71 @@ def show_main(request):
 
 
 def show_experience(request):
+    is_editor = request.user.groups.filter(name="Editor").exists()
+
     context = {
         "name": "Callista Putri Anjola",
-        "experience_list": Experience.objects.all(),
+        "is_editor": is_editor,
+        "form": ExperienceForm(),
     }
+
     return render(request, "experience.html", context)
+
+def get_experience_json(request):
+    title_query = request.GET.get("title", "").strip()
+    experiences = Experience.objects.all()
+
+    if title_query:
+        experiences = experiences.filter(
+            title__icontains=title_query
+        )
+        
+    data = []
+
+    for item in experiences:
+        data.append({
+            "pk": str(item.id),
+            "fields": {
+                "title": item.title,
+                "description": item.description,
+                "category": item.get_category_display(),
+                "thumbnail": item.thumbnail,
+                "started_at": item.started_at.isoformat(),
+                "ended_at": item.ended_at.isoformat()
+                if item.ended_at else None,
+                "is_ongoing": item.is_ongoing,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
+
+@require_POST
+def create_experience_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {
+                "message": "Hanya pemilik portofolio yang dapat menambahkan pengalaman."
+            },
+            status=403,
+        )
+
+    form = ExperienceForm(request.POST)
+
+    if form.is_valid():
+        experience = form.save()
+
+        return JsonResponse(
+            {
+                "message": "Pengalaman berhasil ditambahkan.",
+                "pk": str(experience.id),
+            },
+            status=201,
+        )
+
+    return JsonResponse(
+        {"errors": form.errors.get_json_data()},
+        status=400,
+    )
 
 def show_education(request):
     institution_query = request.GET.get("institution", "").strip()

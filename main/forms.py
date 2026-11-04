@@ -5,15 +5,6 @@ from django.core.exceptions import ValidationError
 from django.utils.html import strip_tags
 
 class EducationForm(ModelForm):
-    password = forms.CharField(
-        label="Password",
-        widget=forms.PasswordInput(
-            attrs={
-                "placeholder": "Masukkan kode rahasia",
-            }
-        ),
-    )
-
     class Meta:
         model = Education
         fields = [

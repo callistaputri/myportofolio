@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,7 @@ MAILERS = {
 }
 
 CSRF_TRUSTED_ORIGINS = ["https://callista-putri51-myportofolio.pws.cs.ui.ac.id/"]
+
+LOGIN_REDIRECT_URL = "/api/v1/education/"
+
+LOGOUT_REDIRECT_URL = "/api/v1/education/"

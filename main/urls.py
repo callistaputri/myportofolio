@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from main.views import show_main, show_experience, show_education, create_education, get_education_json, delete_education, update_education, register, login_user, logout_user, toggle_star, create_education_ajax, get_experience_json, create_experience_ajax
 

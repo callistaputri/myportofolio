@@ -1,15 +1,16 @@
+
 <div id="add-education-modal"
      class="education-form-modal"
      popover="auto"
      role="dialog"
      aria-modal="true"
-     aria-labelledby="add-education-modal-title">
+     aria-labelledby="education-modal-title">
 
     <button type="button"
             class="education-form-modal__backdrop"
             popovertarget="add-education-modal"
             popovertargetaction="hide"
-            aria-label="Tutup form tambah pendidikan">
+            aria-label="Tutup form pendidikan">
     </button>
 
     <div class="education-form-modal__content">
@@ -18,11 +19,11 @@
                 class="education-form-modal__close"
                 popovertarget="add-education-modal"
                 popovertargetaction="hide"
-                aria-label="Tutup form tambah pendidikan">
+                aria-label="Tutup form pendidikan">
             ×
         </button>
 
-        <h2 id="add-education-modal-title">
+        <h2 id="education-modal-title">
             Tambah Pendidikan Baru
         </h2>
 
@@ -42,9 +43,7 @@
                     {{ field }}
 
                     {% for error in field.errors %}
-                        <p class="form-error">
-                            {{ error }}
-                        </p>
+                        <p class="form-error">{{ error }}</p>
                     {% endfor %}
                 </div>
             {% endfor %}
@@ -58,7 +57,7 @@
                     Batal
                 </button>
 
-                <button type="submit" class="button">
+                <button type="submit" class="button" id="education-submit-button">
                     Tambah Pendidikan
                 </button>
 

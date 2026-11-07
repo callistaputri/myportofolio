@@ -98,23 +98,3 @@ def education_star(request, education_id):
         context={"request": request}
     )
     return Response(serializer.data)
-
-@api_view(["POST"])
-@authentication_classes([SessionAuthentication])
-@permission_classes([IsAuthenticated])
-def education_star(request, education_id):
-    education = get_object_or_404(Education, pk=education_id)
-
-    if request.user in education.starred_by.all():
-        education.starred_by.remove(request.user)
-        is_starred = False
-    else:
-        education.starred_by.add(request.user)
-        is_starred = True
-
-    serializer = EducationSerializer(
-        education,
-        context={"request": request},
-    )
-
-    return Response(serializer.data)

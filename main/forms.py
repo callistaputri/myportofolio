@@ -58,6 +58,7 @@ class EducationForm(ModelForm):
 
         return institution
 
+
     def clean_field_of_study(self):
         return strip_tags(
             self.cleaned_data["field_of_study"]

@@ -93,3 +93,27 @@ Dalam mengerjakan tugas 5 saya menggunakan AI tools seperti ChatGPT dan Claude s
 Saya menggunakan AI untuk memahami konsep AJAX, JSON, JS, khususnya dalam menampilkan data Experience secara dinamis tanpa melakukan reload page. Saya juga menggunakan AI untuk memahami penerapan search debouncing, serta dalam menambahkan form untuk add experience menggunakan modal dan pengiriman data melalui AJAX. Saya juga menggunakan AI untuk membantu menyesuaikan tampilan form, search bar, loading state, empty state, error state, serta toast notification agar sesuai dengan fitur yang dibuat.
 
 Saat mengalami error, saya biasanya memberikan potongan kode atau pesan error yang muncul kepada AI untuk membantu memahami penyebabnya. Setelah itu, saya menyesuaikan solusi yang diberi pada project saya serta melakukan test kembali untuk memastikan fitur berjalan lancar.
+
+### Tugas 6
+
+1. REST (Representational State Transfer) merupakan gaya arsitektur web service yang mengelola data sebagai resource melalui URL dan HTTP methods seperti GET, POST, PUT, PATCH, dan DELETE. JSON belum cukup karena JSON hanya merupakan format pertukaran data, sedangkan REST juga mengatur penggunaan resource, HTTP methods, dan status code. PUT digunakan untuk mengupdate seluruh data, sedangkan PATCH hanya memperbarui field tertentu. Contohnya, PUT /api/v1/experiences/<id>/ digunakan saat ingin memperbarui seluruh informasi Experience, seperti title, description, category, dan started_at. Sementara PATCH /api/v1/experiences/<id>/ digunakan ketika hanya ingin mengubah title tanpa mengirimkan field lainnya.
+
+
+2. Serializer berfungsi untuk mengubah objek model Django menjadi format JSON dan memvalidasi data yang diterima sebelum disimpan ke database. Pada Experience API, ExperienceSerializer mengatur field yang ditampilkan, validasi title dan description, serta computed fields seperti star_count dan is_starred. Dibanding dengan membuat dictionary secara manual menggunakan JsonResponse, serializer membuat kode lebih ringkas, terstruktur, konsisten, dan mempermudah proses validasi data.
+
+
+3. Authentication merupakan proses untuk memastikan identitas pengguna, yaitu mengetahui apakah seseorang sudah login dan siapa pengguna tersebut. Sedangkan Authorization adalah proses untuk menentukan tindakan apa saja yang boleh dilakukan oleh pengguna berdasarkan hak akses yang dipunya. Pemeriksaan permission harus dilakukan di server karena frontend hanya mengatur tampilan interface dan tidka menjamin keamanan API. Pengguna tetap bisa mengirimkan request secara langsung melalui browser, postman, ataupun aplikasi lain tanpa menggunakan tombol yang terdapat di halaman. Oleh karena itu, permission seperti IsPortfolioOwnerOrEditorOrReadOnly digunakan untuk memastikan setiap request diperiksa berdasarkan hak akses pengguna sebelum server menjalankan tindakan tersebut
+
+
+4. SessionAuthentication menggunakan session dan cookie untuk mengenali pengguna yang login. CSRF token diperlukan untuk mencegah request yang tidak valid menggunakan session user. Pada Experience API, CSRF token dikirim melalui header X-CSRFToken iuntuk setiap request yang mengubah data. force_authenticate() tidak cukup untuk menguji CSRF karena melewati mekanisme session authentication yang sebenarnya. Oleh karena itu, digunakan APIClient(enforce_csrf_checks=True) untuk memastikan request tanpa token ditolak dengan status 403, sedangkan request dengan token valid berhasil.
+
+
+AI Disclosure
+
+### AI Disclosure
+
+Dalam proses mengerjakan Tugas 6, saya menggunakan AI tools seperti Claude sebagai alat bantu ketika mengalami kesulitan dalam memahami materi, mengimplementasikan fitur, atau menemukan error pada project saya.
+
+Saya menggunakan AI untuk membantu memahami cara menerapkan django REST framework pada model Experience, membuat serializer, mengatur API views dan permissions, serta mengintegrasikan fitur seperti search, create, edit, delete, dan star ke halaman Experience. Saya juga menggunakan AI untuk membantu membuat dan memahami test case, terutama dalam menguji hak akses setiap role, validasi data, dan CSRF token.
+
+Saat mengalami error, biasanya saya memberikan potongan kode atau pesan error yang muncul kepada AI untuk membantu memahami penyebabnya dan mencari solusi. Setelah itu, saya mencoba menerapkan solusi yang diberikan ke dalam project dan mengecek kembali apakah hasilnya sudah sesuai.

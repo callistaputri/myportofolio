@@ -1,7 +1,9 @@
 from django.utils.html import strip_tags
 from rest_framework import serializers
 
-from main.models import Education
+from main.models import Education, Experience
+
+import re
 
 class EducationSerializer(serializers.ModelSerializer):
     star_count = serializers.SerializerMethodField()
@@ -45,3 +47,62 @@ class EducationSerializer(serializers.ModelSerializer):
         return ",".join(
             user.username for user in obj.starred_by.all()
         )
+
+class ExperienceSerializer(serializers.ModelSerializer):
+    star_count = serializers.SerializerMethodField()
+    is_starred = serializers.SerializerMethodField()
+    is_ongoing = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = Experience
+        fields = [
+            "id",
+            "title",
+            "description",
+            "category",
+            "thumbnail",
+            "started_at",
+            "ended_at",
+            "is_ongoing",
+            "star_count",
+            "is_starred",
+        ]
+
+    def validate_title(self, value):
+        if re.search(r"<\s*(script|style)\b", value, re.IGNORECASE):
+            raise serializers.ValidationError(
+                "HTML script and style tags are not allowed."
+            )
+
+        value = strip_tags(value).strip()
+
+        if not value:
+            raise serializers.ValidationError(
+                "Title cannot be empty."
+            )
+
+        return value
+
+    def validate_description(self, value):
+        if re.search(r"<\s*(script|style)\b", value, re.IGNORECASE):
+            raise serializers.ValidationError(
+                "HTML script and style tags are not allowed."
+            )
+
+        value = strip_tags(value).strip()
+
+        if not value:
+            raise serializers.ValidationError(
+                "Description cannot be empty."
+            )
+
+        return value
+
+    def get_star_count(self, obj):
+        return obj.starred_by.count()
+
+    def get_is_starred(self, obj):
+        request = self.context.get("request")
+        if request is None or not request.user.is_authenticated:
+            return False
+        return obj.starred_by.filter(pk=request.user.pk).exists()

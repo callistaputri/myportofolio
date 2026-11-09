@@ -1,6 +1,7 @@
 import uuid
 from django.contrib.auth.models import User
 from django.db import models
+from django.conf import settings
 
 class Experience(models.Model):
     EXPERIENCE_CHOICES = [
@@ -19,6 +20,7 @@ class Experience(models.Model):
     thumbnail = models.URLField(blank=True, null=True)
     started_at = models.DateTimeField()
     ended_at = models.DateTimeField(blank=True, null=True)
+    starred_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="starred_experiences", blank=True)
     def __str__(self):
         return self.title
     
